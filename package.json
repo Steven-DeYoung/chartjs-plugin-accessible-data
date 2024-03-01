@@ -1,5 +1,5 @@
 {
-    "name": "chartjs-plugin-accessible-data",
+    "name": "@steven-deyoung/chartjs-plugin-accessible-data",
     "version": "0.1.0",
     "source": "src/index.js",
     "main": "dist/main.cjs",
@@ -8,10 +8,6 @@
         "clean": "rimraf dist .parcel-cache",
         "watch": "parcel watch",
         "build": "parcel build"
-    },
-    "targets": {
-        "main": {"optimize": true},
-        "module": {"optimize": true}
     },
     "devDependencies": {
         "parcel": "^2.12.0",
