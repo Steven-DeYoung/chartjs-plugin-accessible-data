@@ -1,4 +1,3 @@
-import { ArrayDispenser } from './arrayDispenser';
 import { TableMaker } from './tableMaker';
 
 /**
@@ -8,14 +7,13 @@ import { TableMaker } from './tableMaker';
  * @param dataset Array of data points (primatives, or objects having the same properties).
  */
 export function buildDataTable(rowNames, colNames, dataset) {
-    let rowNameDispenser = new ArrayDispenser(rowNames);
+    rowNames = rowNames.slice(); // Don't modify the passed array
     let tableHeader = TableMaker.constructHeaderRow(colNames);
     let tableRows = [];
 
     for (let dataPoint of dataset.data) {
         let rowData = [];
 
-        // TODO: maybe sanity check using column count, could want different colNames than data points, map would be helpful here
         if (typeof dataPoint === "object") {
             for (let key in dataPoint) {
                 rowData.push(dataPoint[key]);
@@ -23,7 +21,13 @@ export function buildDataTable(rowNames, colNames, dataset) {
         } else {
             rowData.push(dataPoint);
         }
-        tableRows.push(TableMaker.constructRow(rowNameDispenser.dispense(), rowData));
+
+        // Create empty cells for any extra header columns (excluding the row label)
+        for (let i = rowData.length; i < colNames.length - 1; i++) {
+            rowData.push("");
+        }
+
+        tableRows.push(TableMaker.constructRow(rowNames.shift(), rowData));
     }
     return TableMaker.constructTable(tableHeader, tableRows);
 }

@@ -9,7 +9,6 @@ export namespace TableMaker {
      * @param data array of string data
      */
     export function constructRow(rowLabel: string, data: string[]): string {
-        // TODO: Probably safer to construct objects and add innerText than use strings here and return some DOM style object
         return `<tr><th scope="row">${rowLabel}</th><td>${data.join("</td><td>")}</td></tr>`;
     }
 
@@ -18,16 +17,14 @@ export namespace TableMaker {
      * @param columnHeaders array of string column headers
      */
     export function constructHeaderRow(columnHeaders: string[]): string {
-        // TODO: Probably safer to construct objects and add innerText than use strings here and return some DOM style object
         return `<tr><th scope="col">${columnHeaders.join('</th><th scope="col">')}</th></tr>`;
     }
 
     /**
-     * Accep an array of row strings and construct the final HTML table
+     * Accept an array of row strings and construct the final HTML table
      * @param rows array of row strings
      */
     export function constructTable(header: string, rows: string[]): string {
-        // TODO: Probably safer to construct objects and add innerText than use strings here and return some DOM style object
         return `<table><thead>${header}</thead><tbody>${rows.join("")}</tbody></table>`;
     }
 }
