@@ -18,10 +18,14 @@ The associated plugin object should be installed in each chart that needs access
 as follows:
 
 ```javascript
+  // import the associated plugin object  
+  import { <plugin object, e.g. "barData"> } from 'chartjs-plugin-accessible-data';
+
   new Chart(
     document.getElementById('<canvas id>'),
     {
       type: '<chart type, e.g. "bar">',
+      // install the plugin object
       plugins: [ <plugin object, e.g. "barData">, <other plugins> ],
       options: ...,
       data: ...
