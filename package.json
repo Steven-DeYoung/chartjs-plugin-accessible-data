@@ -10,6 +10,7 @@
         "build": "parcel build"
     },
     "devDependencies": {
+        "jest": "^29.7.0",
         "parcel": "^2.12.0",
         "rimraf": "^5.0.5"
     }
