@@ -74,50 +74,48 @@ test("constructEmptyTable", () => {
 });
 
 
-test("constructTableWithHeaderOnly", () => {
-    let headerRow = '<tr><th scope="col">header1</th><th scope="col">header2</th><th scope="col">header3</th><th scope="col">header4</th><th scope="col">header5</th></tr>';
-    let result = TableMaker.constructTable(headerRow, null);
-    let expectedTable = `<table><thead>${headerRow}</thead></table>`;
-    expect(result).toEqual(expectedTable);
+describe("tests using common header/row", () => {
+    let headerRow;
+    let singleRowArr;
+    beforeEach(() => {
+        headerRow = '<tr><th scope="col">header1</th><th scope="col">header2</th><th scope="col">header3</th><th scope="col">header4</th><th scope="col">header5</th></tr>';
+        singleRowArr = ['<tr><th scope="row">label</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>'];
+    });
+
+    test("constructTableWithHeaderOnly", () => {
+        let result = TableMaker.constructTable(headerRow, null);
+        let expectedTable = `<table><thead>${headerRow}</thead></table>`;
+        expect(result).toEqual(expectedTable);
+    });
+
+    test("constructTableWithEmptyRows", () => {
+        let result = TableMaker.constructTable(headerRow, []);
+        let expectedTable = `<table><thead>${headerRow}</thead></table>`;
+        expect(result).toEqual(expectedTable);
+    });
+
+    test("constructTableRowsOnly", () => {
+        let result = TableMaker.constructTable(null, singleRowArr);
+        let expectedTable = `<table><tbody>${singleRowArr[0]}</tbody></table>`;
+        expect(result).toEqual(expectedTable);
+    });
+
+    test("constructTableSingleRow", () => {
+        let result = TableMaker.constructTable(headerRow, singleRowArr);
+        let expectedTable = `<table><thead>${headerRow}</thead><tbody>${singleRowArr[0]}</tbody></table>`;
+        expect(result).toEqual(expectedTable);
+    });
+
+    test("constructTableMultipleRows", () => {
+        let rows = [
+            '<tr><th scope="row">ROW1</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>',
+            '<tr><th scope="row">ROW2</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>',
+            '<tr><th scope="row">ROW3</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>',
+            '<tr><th scope="row">ROW4</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>',
+            '<tr><th scope="row">ROW5</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>'];
+        let result = TableMaker.constructTable(headerRow, rows);
+        let expectedTable = `<table><thead>${headerRow}</thead>` +
+            `<tbody>${rows[0]}${rows[1]}${rows[2]}${rows[3]}${rows[4]}</tbody></table>`;
+        expect(result).toEqual(expectedTable);
+    });
 });
-
-
-test("constructTableWithEmptyRows", () => {
-    let headerRow = '<tr><th scope="col">header1</th><th scope="col">header2</th><th scope="col">header3</th><th scope="col">header4</th><th scope="col">header5</th></tr>';
-    let result = TableMaker.constructTable(headerRow, []);
-    let expectedTable = `<table><thead>${headerRow}</thead></table>`;
-    expect(result).toEqual(expectedTable);
-});
-
-
-test("constructTableRowsOnly", () => {
-    let rows = ['<tr><th scope="row">label</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>'];
-    let result = TableMaker.constructTable(null, rows);
-    let expectedTable = `<table><tbody>${rows[0]}</tbody></table>`;
-    expect(result).toEqual(expectedTable);
-});
-
-
-test("constructTableSingleRow", () => {
-    let headerRow = '<tr><th scope="col">header1</th><th scope="col">header2</th><th scope="col">header3</th><th scope="col">header4</th><th scope="col">header5</th></tr>';
-    let rows = ['<tr><th scope="row">label</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>'];
-    let result = TableMaker.constructTable(headerRow, rows);
-    let expectedTable = `<table><thead>${headerRow}</thead><tbody>${rows[0]}</tbody></table>`;
-    expect(result).toEqual(expectedTable);
-});
-
-
-test("constructTableMultipleRows", () => {
-    let headerRow = '<tr><th scope="col">header1</th><th scope="col">header2</th><th scope="col">header3</th><th scope="col">header4</th><th scope="col">header5</th></tr>';
-    let rows = [
-        '<tr><th scope="row">ROW1</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>',
-        '<tr><th scope="row">ROW2</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>',
-        '<tr><th scope="row">ROW3</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>',
-        '<tr><th scope="row">ROW4</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>',
-        '<tr><th scope="row">ROW5</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>'];
-    let result = TableMaker.constructTable(headerRow, rows);
-    let expectedTable = `<table><thead>${headerRow}</thead>` +
-        `<tbody>${rows[0]}${rows[1]}${rows[2]}${rows[3]}${rows[4]}</tbody></table>`;
-    expect(result).toEqual(expectedTable);
-});
-
