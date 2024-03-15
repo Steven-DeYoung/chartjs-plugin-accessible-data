@@ -32,3 +32,19 @@ as follows:
     }
   );
 ```
+
+## Development
+
+### Building
+The package is built using `parcel`, you can build with:
+
+```bash
+npm run build
+```
+
+### Testing
+The testing is written with `jest`, you can run the tests with: 
+
+```bash
+npm run test
+```

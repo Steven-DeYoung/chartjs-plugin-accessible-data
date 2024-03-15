@@ -9,7 +9,15 @@ export namespace TableMaker {
      * @param data array of string data
      */
     export function constructRow(rowLabel: string, data: string[]): string {
-        return `<tr><th scope="row">${rowLabel}</th><td>${data.join("</td><td>")}</td></tr>`;
+        let labelStr = "";
+        if (rowLabel != null) {
+            labelStr = `<th scope="row">${rowLabel}</th>`;
+        }
+        let dataStr = "";
+        if (data != null && data.length > 0) {
+            dataStr = `<td>${data.join("</td><td>")}</td>`;
+        }
+        return `<tr>${labelStr}${dataStr}</tr>`;
     }
 
     /**
@@ -17,7 +25,11 @@ export namespace TableMaker {
      * @param columnHeaders array of string column headers
      */
     export function constructHeaderRow(columnHeaders: string[]): string {
-        return `<tr><th scope="col">${columnHeaders.join('</th><th scope="col">')}</th></tr>`;
+        let headerStr = "";
+        if (columnHeaders != null && columnHeaders.length > 0) {
+            headerStr = `<th scope="col">${columnHeaders.join('</th><th scope="col">')}</th>`;
+        }
+        return `<tr>${headerStr}</tr>`;
     }
 
     /**
@@ -25,6 +37,14 @@ export namespace TableMaker {
      * @param rows array of row strings
      */
     export function constructTable(header: string, rows: string[]): string {
-        return `<table><thead>${header}</thead><tbody>${rows.join("")}</tbody></table>`;
+        let headerStr = "";
+        if (header != null) {
+            headerStr = `<thead>${header}</thead>`;
+        }
+        let rowsStr = "";
+        if (rows != null && rows.length > 0) {
+            rowsStr = `<tbody>${rows.join("")}</tbody>`;
+        }
+        return `<table>${headerStr}${rowsStr}</table>`;
     }
 }
