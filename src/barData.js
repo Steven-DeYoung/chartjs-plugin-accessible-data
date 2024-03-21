@@ -14,7 +14,7 @@ export const barData = {
         dataStr += `Table of dataset "${dataset.label}":<br/>`;
         dataStr += buildDataTable(rowNames, colNames, dataset);
       });
-  
+
       const par = document.createElement('p');
       par.innerHTML = dataStr;
       chart.canvas.appendChild(par);
