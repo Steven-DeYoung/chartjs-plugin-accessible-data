@@ -1,2 +1,2 @@
-export {barData} from "./barData";
-export {bubbleData} from "./bubbleData";
+export { barData } from "./barData";
+export { bubbleData } from "./bubbleData";
